@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  font-size: medium;
+  font-family: sans-serif;
+  margin: 0%;
+}
+body {
+  background-image: url(./assets/background.jpg);
+  background-size: cover;
+}
+
+.navbar {
+  background-color: #0f1e5b;
+  display: flex;
+  gap: initial;
+}
+
+.navbar-brand {
+  font-size: 27px;
+  color:silver;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-nav .nav-link {
+  color: gray;
+}
+
+.navbar-nav .nav-link:hover {
+  color: rgb(0, 21, 255);
+}
+
+.navbar span {
+  color: gray;
+}
+
+h1 {
+    font: size 45px;
+    background-color:rgba(0, 0, 255, 0.375);
+    text-align: center;}
+
+
+.button{
+  background-color: lightseagreen;
+  border: none;
+  border-radius: 5px; 
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-title{
+  display: flex;
+  justify-content: center;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list{
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
