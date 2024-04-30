@@ -70,9 +70,9 @@ export const Cart = () => {
             if (id) {
                 Swal.fire({
                     icon: "success",
-                    title: "¡Orden realizada con éxito!",
+                    title: "¡Compra realizada con exito!, gracias por confiar en nosotros!",
                     text: `ID de compra: ${id}`,
-                    confirmButtonText: "Aceptar",
+                    confirmButtonText: "Hasta Luego!",
                 }).then(() => {
                     navigate("/");
                     clear();
@@ -93,9 +93,9 @@ export const Cart = () => {
             <div className="container-checkout">
                 {items.length === 0 && cartEmpty && (
                     <div className="carrito-vacio">
-                        <p>Tu carrito está vacío. 🙁</p>
+                        <p>ups! que incomodo,llena este carrito para continuar. 🙁</p>
                         <Link to="/">
-                            <button>Volver a la tienda</button>
+                            <button>Volver a ver los productos</button>
                         </Link>
                     </div>
                 )}
@@ -172,7 +172,7 @@ export const Cart = () => {
                                 )}
                             </div>
                             <div>
-                                <label>Número telefónico</label>
+                                <label>Celular/Telefono Fijo</label>
                                 <input
                                     type="text"
                                     value={buyer.phone}
@@ -207,7 +207,7 @@ export const Cart = () => {
                     </div>
                 )}
                 {processingOrder && (
-                    <div className="loader-checkout">Procesando...</div>
+                    <div className="loader-checkout">Estamos procesando su pedido...</div>
                 )}
             </div>
         </Container>
