@@ -13,12 +13,13 @@ import { ItemList } from "./ItemList";
 
 
 export const ItemListContainer = () => {
-  const [products, setProducts] = useState([]);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const { id } = useParams();
 
   useEffect(() => {
     const db = getFirestore();
-
     let refCollection;
 
     if(!id) refCollection = collection(db, "items");
@@ -28,19 +29,33 @@ export const ItemListContainer = () => {
       )
     }
 
-    getDocs(refCollection).then((snapshot) => {
-      setProducts(
-        snapshot.docs.map((doc)=> {
-          return{ id: doc.id, ...doc.data() };
-        })
+    getDocs(refCollection)
+      .then((snapshot) => {
+          setItems(
+            snapshot.docs.map((doc)=> {
+                return{ id: doc.id, ...doc.data() };
+            })
+          );
+      })
+      .finally(() => setLoading(false))
+    }, [id]);
+
+    if (loading) {
+      return (
+          <div className="loader-wrapper">
+              <div className="loader"></div>
+          </div>
       );
-    });
-  }, [id]);
-
-
+  }
+  
   return (
-    <Container className="container">
-      <ItemList products={products} />
-    </Container>
+    <Container className="mt-4">
+    <h1
+      style={{ textAlign: "center", marginBottom: "20px", color: "#136fec" }}
+    >
+      NUESTROS PRODUCTOS
+    </h1>
+    <ItemList items={items} />
+  </Container>
   );
 };

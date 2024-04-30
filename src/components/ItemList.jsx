@@ -1,9 +1,10 @@
 import { Item } from "./Item";
+import React from "react";
 
-export const ItemList = ({ products }) => {
+export const ItemList = ({ items }) => {
   return (
         <div className="row justify-content-center d-flex flex-wrap justify-content-center">
-          {products.map(product => <Item key={product.id} product={product} />)};
+          {items.map((item) => (<Item key={item.id} item={item} />))};
         </div>
   );
 };
