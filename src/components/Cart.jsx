@@ -1,153 +1,216 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect  } from "react";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { Container } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const initialValues = {
-  name: "",
-  phone: "",
-  email: "",
+    name: "",
+    phone: "",
+    email: "",
 };
 
 export const Cart = () => {
-  const [buyer, setBuyer] = useState(initialValues);
-  
-	const [formError, setFormError] = useState({
-    name: false,
-    phone: false,
-    email: false,
-  });
-	const { items, clear, removeItem } = useContext(CartContext);
+    const [buyer, setBuyer] = useState(initialValues);
+    const [errors, setErrors] = useState({});
+    const [cartEmpty, setCartEmpty] = useState(false);
+    const [processingOrder, setProcessingOrder] = useState(false);
+    const { clear, items, removeItem } = useContext(CartContext);
+    const navigate = useNavigate();
 
-  const handleChange = (ev) => {
-    const { name, value } = ev.target;
+    useEffect(() => {
+        if (items.length === 0) {
+            setCartEmpty(true);
+        } else {
+            setCartEmpty(false);
+        }
+    }, [items]);
 
-    setBuyer((prev) => ({
-      
-			...prev,
-      [name]: value,
-    }));
-
-
-    setFormError((prev) => ({
-      ...prev,
-      [name]: value === "",
-    }));
-  };
-
-  const total = items.reduce((acu, act) => acu + act.price * act.quantity, 0);
-
-  const handleOrder = () => {
-    if (Object.values(formError).some(error => error)) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Por favor complete todos los campos del formulario",
-        confirmButtonText: "Aceptar",
-      });
-      return;
-    }
-
-    const order = {
-      buyer: buyer,
-      items: items,
-      total: total,
+    const handleChange = (ev) => {
+        const { value, name } = ev.target;
+        setBuyer((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
-    const db = getFirestore();
-    const orderCollection = collection(db, "orders");
+    const validate = () => {
+        let isValid = true;
+        const errors = {};
+        setErrors(errors);
+        return isValid;
+    };
 
-    addDoc(orderCollection, order).then(({ id }) => {
-      if (id) {
-        Swal.fire({
-          icon: "success",
-          title: "¡Orden completada!",
-          text: `Su orden con codigo, ${id} ha sido completada!!`,
-          confirmButtonText: "Aceptar",
-        });
-      }
-    });
-  };
+    const total = items.reduce(
+        (acu, act) => acu + act.precio * act.stock,
+        0
+    );
 
-  return (
-    <Container
-      className="mt-4 text-center"
-      style={{ backgroundColor: "#e6f2fe" }}
-    >
-      <h1
-        style={{ textAlign: "center", marginBottom: "5px", color: "#136fec" }}
-      >
-        MI CARRITO
-      </h1>
-      <table>
-        <thead>
-          <tr
-            style={{
-              textAlign: "center",
-              marginBottom: "5px",
-              color: "#136fec",
-              padding: "1em"
-            }}
-          >
-            <th>NOMBRE</th>
-            <th>CANTIDAD</th>
-            <th>PRECIO</th>
-            <th>ELIMINAR</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.title}</td>
-              <td>{item.quantity}</td>
-              <td>{item.price}</td>
-              <td>
-                <button onClick={() => removeItem(item.id)}>ELIMINAR</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button onClick={clear}>VACIAR 🛒</button>
-      <h2
-        style={{ textAlign: "center", marginBottom: "5px", color: "#136fec" }}
-      >
-        DATOS
-      </h2>
-      <form className="form-container">
-        <div>
-          <label>Nombre</label>
-          <input
-            type="text"
-            value={buyer.name}
-            name="name"
-            onChange={handleChange}
-          />
-          {formError.name && <p style={{ color: 'red' }}>Por favor ingrese su nombre</p>}
-        </div>
-        <div>
-          <label>Celular</label>
-          <input
-            type="number"
-            value={buyer.phone}
-            name="phone"
-            onChange={handleChange}
-          />
-          {formError.phone && <p style={{ color: 'red' }}>Por favor ingrese su número de teléfono</p>}
-        </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            value={buyer.email}
-            name="email"
-            onChange={handleChange}
-          />
-          {formError.email && <p style={{ color: 'red' }}>Por favor ingrese su correo electrónico</p>}
-        </div>
-        <button onClick={handleOrder}>COMPRAR</button>
-      </form>
-    </Container>
-  );
+    const handleOrder = async () => {
+        if (!validate()) {
+            return;
+        }
+
+        setProcessingOrder(true);
+
+        const order = {
+            buyer: buyer,
+            items: items,
+            total: total,
+        };
+
+        const db = getFirestore();
+        const ordersCollection = collection(db, "orders");
+
+        try {
+            const { id } = await addDoc(ordersCollection, order);
+
+            if (id) {
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Orden realizada con éxito!",
+                    text: `ID de compra: ${id}`,
+                    confirmButtonText: "Aceptar",
+                }).then(() => {
+                    navigate("/");
+                    clear();
+                });
+            }
+        } catch (error) {
+            console.error("Error al agregar documento: ", error);
+            setProcessingOrder(false);
+        }
+    };
+
+    const handleClearShop = () => {
+        clear();
+    };
+
+    return (
+        <Container className="mt-4">
+            <div className="container-checkout">
+                {items.length === 0 && cartEmpty && (
+                    <div className="carrito-vacio">
+                        <p>Tu carrito está vacío. 🙁</p>
+                        <Link to="/">
+                            <button>Volver a la tienda</button>
+                        </Link>
+                    </div>
+                )}
+                <div className="carrito-datos-total">
+                    <h1>Carrito</h1>
+                    {items.length > 0 && (
+                        <div>
+                            <div className="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Imagen</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {items.map((item) => (
+                                            <tr key={item.id}>
+                                                <td>{item.title}</td>
+                                                <td>
+                                                    <img
+                                                        src={item.imageURL}
+                                                        alt={item.title}
+                                                    />
+                                                </td>
+                                                <td>{item.stock}</td>
+                                                <td>{item.price}</td>
+                                                <td>
+                                                    <button
+                                                        onClick={() =>
+                                                            removeItem(item.id)
+                                                        }
+                                                    >
+                                                        eliminar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <Link to="/">
+                                <button>Seguir comprando</button>
+                            </Link>
+                            <button onClick={handleClearShop}>
+                                vaciar carrito
+                            </button>
+                        </div>
+                    )}
+                </div>
+                {items.length > 0 && !processingOrder && (
+                    <div className="form-checkout">
+                        <h2>Datos</h2>
+                        <form
+                            className={`checkout-form ${
+                                Object.keys(errors).length > 0 ? "shake" : ""
+                            }`}
+                        >
+                            <div>
+                                <label>Nombre</label>
+                                <input
+                                    type="text"
+                                    value={buyer.name}
+                                    name="name"
+                                    onChange={handleChange}
+                                />
+                                {errors.name && (
+                                    <div className="error-form-text">
+                                        {errors.name}
+                                    </div>
+                                )}
+                            </div>
+                            <div>
+                                <label>Número telefónico</label>
+                                <input
+                                    type="text"
+                                    value={buyer.phone}
+                                    name="phone"
+                                    onChange={handleChange}
+                                    pattern="[0-10]*"
+                                />
+                                {errors.phone && (
+                                    <div className="error-form-text">
+                                        {errors.phone}
+                                    </div>
+                                )}
+                            </div>
+                            <div>
+                                <label>Email</label>
+                                <input
+                                    type="email"
+                                    value={buyer.email}
+                                    name="email"
+                                    onChange={handleChange}
+                                />
+                                {errors.email && (
+                                    <div className="error-form-text">
+                                        {errors.email}
+                                    </div>
+                                )}
+                            </div>
+                        </form>
+                        <button type="button" onClick={handleOrder}>
+                            Comprar
+                        </button>
+                    </div>
+                )}
+                {processingOrder && (
+                    <div className="loader-checkout">Procesando...</div>
+                )}
+            </div>
+        </Container>
+    );
 };
+
