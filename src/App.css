@@ -207,17 +207,55 @@ input[type="email"] {
 /*item.jsx*/
 
 .card-body {
-  padding: 20px; /* Espaciado interno */
+  padding: 20px; 
 }
 
 .card-title {
-  font-weight: bold; /* Negrita para el título */
+  font-weight: bold; 
 }
 
 .card-text {
-  margin-bottom: 10px; /* Espaciado inferior entre los textos */
+  margin-bottom: 10px; 
 }
 
 .button {
-  margin-top: 10px; /* Espaciado superior para el botón */
+  margin-top: 10px; 
+}
+
+/**loading**/
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/**lOADER CHECKOUT**/
+
+.loader-checkout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-size: 1.2em;
+  z-index: 1000;
 }

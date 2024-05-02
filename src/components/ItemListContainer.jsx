@@ -11,7 +11,6 @@ import {
 import Container from "react-bootstrap/Container";
 import { ItemList } from "./ItemList";
 
-
 export const ItemListContainer = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,22 +39,20 @@ export const ItemListContainer = () => {
       .finally(() => setLoading(false))
     }, [id]);
 
-    if (loading) {
-      return (
-          <div className="loader-wrapper">
-              <div className="loader"></div>
-          </div>
-      );
-  }
-  
-      return (
-        <>
-            
-            <Container className="container-item-list" fluid="sm">
-                <div className="item-list-container">
-                    <ItemList items={items} />
-                </div>
-            </Container>
-        </>
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader"></div>
+        <p>Cargando...</p>
+      </div>
     );
+  }
+
+  return (
+    <Container className="container-item-list" fluid="sm">
+      <div className="item-list-container">
+        <ItemList items={items} />
+      </div>
+    </Container>
+  );
 };

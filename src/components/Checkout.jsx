@@ -71,7 +71,7 @@ export const Checkout = () => {
             if (id) {
                 Swal.fire({
                     icon: "success",
-                    title: "¡Compra realizada con éxito!",
+                    title: "¡Compra realizada con éxito!, Gracias por confiar en nosotros!",
                     text: `ID de compra: ${id}`,
                     confirmButtonText: "Hasta luego",
                 }).then(() => {
