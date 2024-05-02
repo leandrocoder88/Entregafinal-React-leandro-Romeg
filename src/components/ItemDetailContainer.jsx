@@ -30,8 +30,8 @@ export const ItemDetailContainer = () => {
           <img 
             src={item.imageUrl} 
             alt={item.name} 
-            className="img-fluid" // Utiliza la clase img-fluid de Bootstrap para que la imagen sea responsive
-            style={{ maxWidth: "%", height: "auto" }} // Establecer estilos para la imagen
+            className="img-fluid" 
+            style={{ maxWidth: "%", height: "auto" }} 
           />
         </div>
         <ItemDetail item={item}/>

@@ -123,6 +123,101 @@ h1 {
 }
 
 .table-container img {
-  max-width: 100px; /* Establece el ancho máximo deseado para las imágenes */
-  height: auto; /* Para mantener la proporción de aspecto */
+  max-width: 100px; 
+  height: auto; 
+}
+
+.carrito-vacio {
+  background-color:  rgba(3, 3, 164, 0.822); 
+  border: 1px solid #f5c6cb;
+  border-radius: 5px; 
+  padding: 20px;
+  margin-bottom: 20px; 
+  text-align: center; 
+}
+
+.carrito-vacio p {
+  margin-bottom: 10px;
+  color: rgb(174, 173, 173);
+}
+
+.carrito-vacio button {
+  background-color: #dc3545; 
+  color: white;
+  border: none; 
+  border-radius: 5px;
+  padding: 10px 20px; 
+  cursor: pointer; 
+}
+
+.carrito-vacio button:hover {
+  background-color: #c82333; 
+}
+
+.precio-final h2 {margin-bottom: 20px; 
+  font-size: 30px; 
+  background-color: #0056b3;
+  text-align: center;;
+
+}
+
+.form-checkout {
+  background-color: rgb(216, 215, 215); 
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 30px; 
+}
+
+.form-checkout h2 {
+  margin-bottom: 20px; 
+  font-size: 35px; 
+  background-color: #0056b3;
+  text-align: center;
+}
+
+.form-checkout label {
+  font-weight: bold; 
+}
+
+.form-group {
+  margin-bottom: 20px; 
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #ced4da;
+  border-radius: 5px; 
+}
+
+.btn-primary {
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px;
+  padding: 10px 20px; 
+  cursor: pointer; 
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; 
+}
+/*item.jsx*/
+
+.card-body {
+  padding: 20px; /* Espaciado interno */
+}
+
+.card-title {
+  font-weight: bold; /* Negrita para el título */
+}
+
+.card-text {
+  margin-bottom: 10px; /* Espaciado inferior entre los textos */
+}
+
+.button {
+  margin-top: 10px; /* Espaciado superior para el botón */
 }

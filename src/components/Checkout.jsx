@@ -122,7 +122,7 @@ export const Cart = () => {
                                                 <img src={item.imageURL} alt={item.title} />
                                             </td>
                                             <td>{item.quantity}</td>
-                                            <td>{item.price}</td>
+                                            <td>$ {item.price} ARS</td>
                                             <td>
                                                 <button onClick={() => removeItem(item.id)}>Eliminar</button>
                                             </td>
@@ -131,7 +131,7 @@ export const Cart = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <div>
+                        <div className="precio-final">
                             <h2>El monto total de su compra es : ${total} ARS</h2>
                         </div>
                         <Link to="/">

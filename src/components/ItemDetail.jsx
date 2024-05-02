@@ -15,13 +15,13 @@ export const ItemDetail = ({ item }) => {
     >
       {item && (
         <>
-          <div>{item.title}</div>
-          <div>Tipo:{item.categoryId}</div>
+          <div>Nombre: {item.title}</div>
+          <div>Tipo: {item.categoryId}</div>
           <div>${item.price} ARS</div>
           <img
             src={item.imageURL}
             alt={item.title}
-            style={{ maxWidth: "35%", height: "auto" }} // Modificamos el tamaño de la imagen
+            style={{ maxWidth: "35%", height: "auto" }} 
           />
           <ItemCount onAdd={add} stock={item.stock} />
         </>

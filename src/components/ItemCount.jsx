@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-
+import { Link } from "react-router-dom";
 export const ItemCount = ({ onAdd, stock }) => {
   const [count, setCount] = useState(1);
 
@@ -18,10 +18,13 @@ export const ItemCount = ({ onAdd, stock }) => {
 
   return (
     <div>
-      <mark onClick={handleDecrease}>➖</mark>
+      <button className="btn btn-outline-primary mr-2" onClick={handleDecrease}>➖</button>
       <input value={count} readOnly />
-      <mark onClick={handleIncrease}>➕</mark>
-      <button onClick={handleAdd}>AGREGAR AL CARRITO</button>
+      <button className="btn btn-outline-primary ml-2 mr-2" onClick={handleIncrease}>➕</button>
+      <button className="btn btn-primary mr-2" onClick={handleAdd}>AGREGAR AL CARRITO</button>
+      <Link to="/">
+        <button className="btn btn-secondary">Agregar otros productos</button>
+      </Link>
     </div>
   );
 };
