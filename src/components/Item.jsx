@@ -1,15 +1,16 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import "../App.css";
 
+// Componente para mostrar un item
 export const Item = ({ item }) => {
   return (
     <Card className="card">
+      {/* Detalles del item */}
       <Card.Img
         variant="top"
         src={item.imageURL}
-        style={{ maxWidth: "50%", height: "auto" }} // Establecer estilos para la imagen
+        style={{ maxWidth: "50%", height: "auto" }}
       />
       <Card.Body>
         <Card.Title>Nombre: {item.title}</Card.Title>
@@ -28,6 +29,7 @@ export const Item = ({ item }) => {
         <Card.Text>
           <span style={{ fontWeight: "bold" }}>Stock:</span> {item.stock}
         </Card.Text>
+        {/* Botón para comprar el producto */}
         <Link to={`/item/${item.id}`}>
           <Button className="button" variant="primary">
             Comprar Producto
@@ -37,3 +39,5 @@ export const Item = ({ item }) => {
     </Card>
   );
 };
+
+export default Item;
