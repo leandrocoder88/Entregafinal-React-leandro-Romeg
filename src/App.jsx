@@ -1,17 +1,17 @@
-import {BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import { ItemListContainer } from "./components/ItemListContainer";
 import { ItemDetailContainer } from "./components/ItemDetailContainer";
 import { NavBar } from "./components/NavBar";
-import { CartProvider} from "./context/CartContext";
+import { CartProvider } from "./context/CartContext";
 import { Checkout } from "./components/Checkout";
-import 'sweetalert2/dist/sweetalert2.min.css';
+import "sweetalert2/dist/sweetalert2.min.css";
 
-function NotFound(){
-  return <h1>404 - Ups, Página No Encontrada</h1>
+function NotFound() {
+  return <h1>404 - Ups, Página No Encontrada</h1>;
 }
 function App() {
   return (
@@ -20,14 +20,14 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Routes>
-            <Route path="/" element={<ItemListContainer/>} />
-            <Route path="/category/:id" element={<ItemListContainer/>} />
-            <Route path="/checkout" element={<Checkout />}/>
+            <Route path="/" element={<ItemListContainer />} />
+            <Route path="/category/:id" element={<ItemListContainer />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/item/:id" element={<ItemDetailContainer />} />
-            <Route path="*" element={<NotFound />}/>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-      </CartProvider>  
+      </CartProvider>
     </div>
   );
 }

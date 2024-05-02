@@ -21,7 +21,7 @@ export const ItemDetail = ({ item }) => {
           <img
             src={item.imageURL}
             alt={item.title}
-            style={{ maxWidth: "35%", height: "auto" }} 
+            style={{ maxWidth: "35%", height: "auto" }}
           />
           <ItemCount onAdd={add} stock={item.stock} />
         </>
@@ -29,6 +29,5 @@ export const ItemDetail = ({ item }) => {
     </Container>
   );
 };
-
 
 export default ItemDetail;

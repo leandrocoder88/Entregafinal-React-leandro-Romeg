@@ -17,7 +17,7 @@ body {
 
 .navbar-brand {
   font-size: 27px;
-  color:silver;
+  color: silver;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -34,31 +34,31 @@ body {
 }
 
 h1 {
-    font: size 45px;
-    background-color:rgba(0, 0, 255, 0.375);
-    text-align: center;}
+  font: size 45px;
+  background-color: rgba(0, 0, 255, 0.375);
+  text-align: center;
+}
 
-
-.button{
+.button {
   background-color: lightseagreen;
   border: none;
-  border-radius: 5px; 
+  border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.card-title{
+.card-title {
   display: flex;
   justify-content: center;
 }
 
-.card{
+.card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.list{
+.list {
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -72,9 +72,7 @@ h1 {
   justify-content: center;
   padding: 20px;
   background-color: rgba(0, 0, 255, 0.375);
-
 }
-
 
 .item-list-container {
   display: flex;
@@ -88,18 +86,18 @@ h1 {
 }
 
 .image-container img {
-  max-width: 100%; 
-  height: auto; 
+  max-width: 100%;
+  height: auto;
 }
 
 .carrito-checkout {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 10em;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 10em;
 }
 
 .form-group {
@@ -123,17 +121,17 @@ h1 {
 }
 
 .table-container img {
-  max-width: 100px; 
-  height: auto; 
+  max-width: 100px;
+  height: auto;
 }
 
 .carrito-vacio {
-  background-color:  rgba(3, 3, 164, 0.822); 
+  background-color: rgba(3, 3, 164, 0.822);
   border: 1px solid #f5c6cb;
-  border-radius: 5px; 
+  border-radius: 5px;
   padding: 20px;
-  margin-bottom: 20px; 
-  text-align: center; 
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .carrito-vacio p {
@@ -142,84 +140,84 @@ h1 {
 }
 
 .carrito-vacio button {
-  background-color: #dc3545; 
+  background-color: #dc3545;
   color: white;
-  border: none; 
+  border: none;
   border-radius: 5px;
-  padding: 10px 20px; 
-  cursor: pointer; 
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 .carrito-vacio button:hover {
-  background-color: #c82333; 
+  background-color: #c82333;
 }
 
-.precio-final h2 {margin-bottom: 20px; 
-  font-size: 30px; 
-  background-color: #0056b3;
-  text-align: center;;
-
+.precio-final h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  background-color: rgb(191, 188, 188);
+  text-align: center;
 }
 
 .form-checkout {
-  background-color: rgb(216, 215, 215); 
-  padding: 20px; 
-  border-radius: 10px; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  margin-bottom: 30px; 
+  background-color: rgb(216, 215, 215);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .form-checkout h2 {
-  margin-bottom: 20px; 
-  font-size: 35px; 
+  margin-bottom: 20px;
+  font-size: 35px;
   background-color: #0056b3;
   text-align: center;
 }
 
 .form-checkout label {
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .form-group {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 input[type="text"],
 input[type="email"] {
-  width: 100%; 
-  padding: 10px; 
+  width: 100%;
+  padding: 10px;
   border: 1px solid #ced4da;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .btn-primary {
-  background-color: #007bff; 
-  color: #fff; 
-  border: none; 
+  background-color: #007bff;
+  color: #fff;
+  border: none;
   border-radius: 5px;
-  padding: 10px 20px; 
-  cursor: pointer; 
+  padding: 10px 20px;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 /*item.jsx*/
 
 .card-body {
-  padding: 20px; 
+  padding: 20px;
 }
 
 .card-title {
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .card-text {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .button {
-  margin-top: 10px; 
+  margin-top: 10px;
 }
 
 /**loading**/
@@ -242,8 +240,12 @@ input[type="email"] {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 /**lOADER CHECKOUT**/
 

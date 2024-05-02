@@ -10,14 +10,21 @@ export const NavBar = () => {
     <>
       <Navbar>
         <Container>
-          <Navbar.Brand to ="/" className="mr-auto" as={NavLink}>Ceramica Roma</Navbar.Brand>
+          <Navbar.Brand to="/" className="mr-auto" as={NavLink}>
+            Ceramica Roma
+          </Navbar.Brand>
           <Nav className="ml-auto">
-            <Nav.Link to="/category/Tazas" as={NavLink}>Tazas</Nav.Link>
-            <Nav.Link to="/category/Pocillos" as={NavLink}>Pocillos</Nav.Link>
-            <Nav.Link to="/category/Platos" as={NavLink}>Platos</Nav.Link>
+            <Nav.Link to="/category/Tazas" as={NavLink}>
+              Tazas
+            </Nav.Link>
+            <Nav.Link to="/category/Pocillos" as={NavLink}>
+              Pocillos
+            </Nav.Link>
+            <Nav.Link to="/category/Platos" as={NavLink}>
+              Platos
+            </Nav.Link>
             <CartWidget />
           </Nav>
-          
         </Container>
       </Navbar>
     </>
