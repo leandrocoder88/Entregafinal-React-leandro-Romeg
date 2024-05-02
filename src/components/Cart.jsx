@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import errorImage from "../assets/errorcampo.gif";
+import "../App.css";
 
 const initialValues = {
     name: "",
@@ -37,6 +38,8 @@ export const Cart = () => {
             Swal.fire({
                 title: "🚨🚨uupps, que incomodo!🚨🚨",
                 imageUrl: errorImage,
+                imageWidth: 300,
+                imageHeight: 300,
                 text: "✍Por favor completa todos los campos✍",
             });
             return false;
@@ -44,7 +47,9 @@ export const Cart = () => {
         return true;
     };
 
-    const total = items.reduce((acu, act) => acu + act.price * act.stock, 0);
+    const total = items.reduce((accumulator, currentItem) => {
+        return accumulator + (currentItem.price * currentItem.quantity);
+    }, 0);
 
     const handleOrder = async () => {
         if (!validate()) return;
@@ -86,7 +91,7 @@ export const Cart = () => {
 
     return (
         <Container className="mt-4">
-            <div className="container-checkout">
+            <div className="carrito-checkout">
                 {cartEmpty && (
                     <div className="carrito-vacio">
                         <p>¡Ups! El carrito está vacío. </p>
@@ -98,57 +103,58 @@ export const Cart = () => {
                 {!cartEmpty && (
                     <div className="carrito-datos-total">
                         <h1>Carrito</h1>
-                        <div>
-                            <div className="table-container">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th>Imagen</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>Eliminar</th>
+                        <div className="table-container">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Imagen</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {items.map((item) => (
+                                        <tr key={item.id}>
+                                            <td>{item.title}</td>
+                                            <td>
+                                                <img src={item.imageURL} alt={item.title} />
+                                            </td>
+                                            <td>{item.quantity}</td>
+                                            <td>{item.price}</td>
+                                            <td>
+                                                <button onClick={() => removeItem(item.id)}>Eliminar</button>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        {items.map((item) => (
-                                            <tr key={item.id}>
-                                                <td>{item.title}</td>
-                                                <td>
-                                                    <img src={item.imageURL} alt={item.title} />
-                                                </td>
-                                                <td>{item.stock}</td>
-                                                <td>{item.price}</td>
-                                                <td>
-                                                    <button onClick={() => removeItem(item.id)}>Eliminar</button>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <Link to="/">
-                                <button>Seguir comprando</button>
-                            </Link>
-                            <button onClick={handleClearShop}>Vaciar carrito</button>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
+                        <div>
+                            <h2>El monto total de su compra es : ${total} ARS</h2>
+                        </div>
+                        <Link to="/">
+                            <button className="btn btn-secondary">Seguir comprando</button>
+                        </Link>
+                        <button className="btn btn-danger" onClick={handleClearShop}>Vaciar carrito</button>
                         <div className="form-checkout">
                             <h2>Datos</h2>
                             <form>
-                                <div>
+                                <div className="form-group">
                                     <label>Nombre</label>
-                                    <input type="text" value={buyer.name} name="name" onChange={handleChange} />
+                                    <input type="text" value={buyer.name} name="name" onChange={handleChange} className="form-control" />
                                 </div>
-                                <div>
+                                <div className="form-group">
                                     <label>Celular/Telefono Fijo</label>
-                                    <input type="text" value={buyer.phone} name="phone" onChange={handleChange} />
+                                    <input type="text" value={buyer.phone} name="phone" onChange={handleChange} className="form-control" />
                                 </div>
-                                <div>
+                                <div className="form-group">
                                     <label>Email</label>
-                                    <input type="email" value={buyer.email} name="email" onChange={handleChange} />
+                                    <input type="email" value={buyer.email} name="email" onChange={handleChange} className="form-control" />
                                 </div>
                             </form>
-                            <button type="button" onClick={handleOrder}>Comprar</button>
+                            <button type="button" onClick={handleOrder} className="btn btn-primary">Comprar</button>
                         </div>
                     </div>
                 )}

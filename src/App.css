@@ -71,7 +71,7 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-color: #faeee7;
+  background-color: rgba(0, 0, 255, 0.375);
 
 }
 
@@ -82,17 +82,17 @@ h1 {
   justify-content: center;
   gap: 20px;
   max-width: 1200px;
-  background-color: #fffffe;
+  background-color: gray;
   padding: 20px;
   border-radius: 20px;
 }
 
-/*.image-container img {
+.image-container img {
   max-width: 100%; 
   height: auto; 
-}*/
+}
 
-.container-checkout {
+.carrito-checkout {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -100,4 +100,29 @@ h1 {
     align-items: center;
     flex-direction: row;
     gap: 10em;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.btn {
+  margin-right: 0.5rem;
+}
+
+.table-container img {
+  max-width: 100px; /* Establece el ancho máximo deseado para las imágenes */
+  height: auto; /* Para mantener la proporción de aspecto */
 }
