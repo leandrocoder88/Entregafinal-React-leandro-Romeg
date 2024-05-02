@@ -1,4 +1,4 @@
-# Nombre del Proyecto:Ecommerce ficticio
+# Nombre del Proyecto:Entrga final del Ecommerce-curso de React en Coder House
 
 Este proyecto es una tienda en línea desarrollada con React.js y Firebase, que permite a los usuarios explorar una variedad de productos, agregarlos al carrito de compras y realizar pedidos.
 
@@ -25,16 +25,10 @@ Aparte de las dependencias trabajadas en clase, se utilizaron las siguientes dep
 - **Firebase:** Se utilizó la biblioteca `firebase` para interactuar con los servicios de Firebase, como Firestore y la autenticación de usuarios.
 - **React Bootstrap:** Se utilizó `react-bootstrap` para acceder a componentes de interfaz de usuario preestilizados y facilitar el diseño y la maquetación de la aplicación.
 
-## Instalación
-
-1. Clona este repositorio: `git clone https://github.com/tu-usuario/tu-proyecto.git`
-2. Instala las dependencias: `npm install`
-3. Configura tu proyecto Firebase y proporciona las credenciales necesarias en el archivo `.env`.
-
 ## Uso
 
 1. Inicia la aplicación: `npm start`
-2. Abre tu navegador web y visita `http://localhost:3000` para ver la aplicación en funcionamiento.
+2. Abre tu navegador web y visita `http://localhost:5173/` para ver la aplicación en funcionamiento.
 3. Explora los productos, agrega elementos al carrito, realiza pedidos y experimenta con las diferentes funcionalidades de la aplicación.
 
 ## Contribución
@@ -43,4 +37,4 @@ Las contribuciones son bienvenidas. Si tienes sugerencias para mejorar este proy
 
 ## Licencia
 
-Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
+Todos los derechos de fotografias reservados.
