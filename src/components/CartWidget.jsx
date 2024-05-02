@@ -13,7 +13,7 @@ export const CartWidget = () => {
   if (!total) return null;
 
   return (
-    <Link to="/cart">
+    <Link to="/checkout">
       <div id="cart-widget">
         <img src={cart} alt="Carrito de Compras" height={40} />
         <span>{total}</span>

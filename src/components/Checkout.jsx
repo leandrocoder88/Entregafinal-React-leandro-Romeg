@@ -14,7 +14,7 @@ const initialValues = {
     email: "",
 };
 
-export const Cart = () => {
+export const Checkout = () => {
     const [buyer, setBuyer] = useState(initialValues);
     const [cartEmpty, setCartEmpty] = useState(false);
     const [processingOrder, setProcessingOrder] = useState(false);
