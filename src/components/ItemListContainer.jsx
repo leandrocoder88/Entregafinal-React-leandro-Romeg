@@ -48,14 +48,14 @@ export const ItemListContainer = () => {
       );
   }
   
-  return (
-    <Container className="mt-4">
-    <h1
-      style={{ textAlign: "center", marginBottom: "20px", color: "#136fec" }}
-    >
-      NUESTROS PRODUCTOS
-    </h1>
-    <ItemList items={items} />
-  </Container>
-  );
+      return (
+        <>
+            
+            <Container className="container-item-list" fluid="sm">
+                <div className="item-list-container">
+                    <ItemList items={items} />
+                </div>
+            </Container>
+        </>
+    );
 };

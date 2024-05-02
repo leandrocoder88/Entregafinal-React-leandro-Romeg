@@ -10,21 +10,25 @@ export const ItemDetail = ({ item }) => {
 
   return (
     <Container
-      className="mt-4 text-center"
+      className="mt-1 text-center"
       style={{ backgroundColor: "#e6f2fe" }}
     >
       {item && (
         <>
           <div>{item.title}</div>
-          <div>{item.categoryId}</div>
-          <div>Stock {item.stock}</div>
-          <div>${item.price}</div>
-          <img src={item.imageURL} alt={item.title} />
+          <div>Tipo:{item.categoryId}</div>
+          <div>${item.price} ARS</div>
+          <img
+            src={item.imageURL}
+            alt={item.title}
+            style={{ maxWidth: "35%", height: "auto" }} // Modificamos el tamaño de la imagen
+          />
           <ItemCount onAdd={add} stock={item.stock} />
         </>
       )}
     </Container>
   );
 };
+
 
 export default ItemDetail;

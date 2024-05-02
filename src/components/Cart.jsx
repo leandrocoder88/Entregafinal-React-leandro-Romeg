@@ -1,10 +1,11 @@
-import { useContext, useState, useEffect  } from "react";
+import { useContext, useState, useEffect } from "react";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import { Container } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import errorImage from "../assets/errorcampo.gif";
 
 const initialValues = {
     name: "",
@@ -14,18 +15,13 @@ const initialValues = {
 
 export const Cart = () => {
     const [buyer, setBuyer] = useState(initialValues);
-    const [errors, setErrors] = useState({});
     const [cartEmpty, setCartEmpty] = useState(false);
     const [processingOrder, setProcessingOrder] = useState(false);
     const { clear, items, removeItem } = useContext(CartContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (items.length === 0) {
-            setCartEmpty(true);
-        } else {
-            setCartEmpty(false);
-        }
+        setCartEmpty(items.length === 0);
     }, [items]);
 
     const handleChange = (ev) => {
@@ -37,21 +33,21 @@ export const Cart = () => {
     };
 
     const validate = () => {
-        let isValid = true;
-        const errors = {};
-        setErrors(errors);
-        return isValid;
+        if (!buyer.name.trim() || !buyer.phone.trim() || !buyer.email.trim()) {
+            Swal.fire({
+                title: "🚨🚨uupps, que incomodo!🚨🚨",
+                imageUrl: errorImage,
+                text: "✍Por favor completa todos los campos✍",
+            });
+            return false;
+        }
+        return true;
     };
 
-    const total = items.reduce(
-        (acu, act) => acu + act.precio * act.stock,
-        0
-    );
+    const total = items.reduce((acu, act) => acu + act.price * act.stock, 0);
 
     const handleOrder = async () => {
-        if (!validate()) {
-            return;
-        }
+        if (!validate()) return;
 
         setProcessingOrder(true);
 
@@ -70,9 +66,9 @@ export const Cart = () => {
             if (id) {
                 Swal.fire({
                     icon: "success",
-                    title: "¡Compra realizada con exito!, gracias por confiar en nosotros!",
+                    title: "¡Compra realizada con éxito!",
                     text: `ID de compra: ${id}`,
-                    confirmButtonText: "Hasta Luego!",
+                    confirmButtonText: "Hasta luego",
                 }).then(() => {
                     navigate("/");
                     clear();
@@ -91,17 +87,17 @@ export const Cart = () => {
     return (
         <Container className="mt-4">
             <div className="container-checkout">
-                {items.length === 0 && cartEmpty && (
+                {cartEmpty && (
                     <div className="carrito-vacio">
-                        <p>ups! que incomodo,llena este carrito para continuar. 🙁</p>
+                        <p>¡Ups! El carrito está vacío. </p>
                         <Link to="/">
                             <button>Volver a ver los productos</button>
                         </Link>
                     </div>
                 )}
-                <div className="carrito-datos-total">
-                    <h1>Carrito</h1>
-                    {items.length > 0 && (
+                {!cartEmpty && (
+                    <div className="carrito-datos-total">
+                        <h1>Carrito</h1>
                         <div>
                             <div className="table-container">
                                 <table>
@@ -119,21 +115,12 @@ export const Cart = () => {
                                             <tr key={item.id}>
                                                 <td>{item.title}</td>
                                                 <td>
-                                                    <img
-                                                        src={item.imageURL}
-                                                        alt={item.title}
-                                                    />
+                                                    <img src={item.imageURL} alt={item.title} />
                                                 </td>
                                                 <td>{item.stock}</td>
                                                 <td>{item.price}</td>
                                                 <td>
-                                                    <button
-                                                        onClick={() =>
-                                                            removeItem(item.id)
-                                                        }
-                                                    >
-                                                        eliminar
-                                                    </button>
+                                                    <button onClick={() => removeItem(item.id)}>Eliminar</button>
                                                 </td>
                                             </tr>
                                         ))}
@@ -143,67 +130,26 @@ export const Cart = () => {
                             <Link to="/">
                                 <button>Seguir comprando</button>
                             </Link>
-                            <button onClick={handleClearShop}>
-                                vaciar carrito
-                            </button>
+                            <button onClick={handleClearShop}>Vaciar carrito</button>
                         </div>
-                    )}
-                </div>
-                {items.length > 0 && !processingOrder && (
-                    <div className="form-checkout">
-                        <h2>Datos</h2>
-                        <form
-                            className={`checkout-form ${
-                                Object.keys(errors).length > 0 ? "shake" : ""
-                            }`}
-                        >
-                            <div>
-                                <label>Nombre</label>
-                                <input
-                                    type="text"
-                                    value={buyer.name}
-                                    name="name"
-                                    onChange={handleChange}
-                                />
-                                {errors.name && (
-                                    <div className="error-form-text">
-                                        {errors.name}
-                                    </div>
-                                )}
-                            </div>
-                            <div>
-                                <label>Celular/Telefono Fijo</label>
-                                <input
-                                    type="text"
-                                    value={buyer.phone}
-                                    name="phone"
-                                    onChange={handleChange}
-                                    pattern="[0-10]*"
-                                />
-                                {errors.phone && (
-                                    <div className="error-form-text">
-                                        {errors.phone}
-                                    </div>
-                                )}
-                            </div>
-                            <div>
-                                <label>Email</label>
-                                <input
-                                    type="email"
-                                    value={buyer.email}
-                                    name="email"
-                                    onChange={handleChange}
-                                />
-                                {errors.email && (
-                                    <div className="error-form-text">
-                                        {errors.email}
-                                    </div>
-                                )}
-                            </div>
-                        </form>
-                        <button type="button" onClick={handleOrder}>
-                            Comprar
-                        </button>
+                        <div className="form-checkout">
+                            <h2>Datos</h2>
+                            <form>
+                                <div>
+                                    <label>Nombre</label>
+                                    <input type="text" value={buyer.name} name="name" onChange={handleChange} />
+                                </div>
+                                <div>
+                                    <label>Celular/Telefono Fijo</label>
+                                    <input type="text" value={buyer.phone} name="phone" onChange={handleChange} />
+                                </div>
+                                <div>
+                                    <label>Email</label>
+                                    <input type="email" value={buyer.email} name="email" onChange={handleChange} />
+                                </div>
+                            </form>
+                            <button type="button" onClick={handleOrder}>Comprar</button>
+                        </div>
                     </div>
                 )}
                 {processingOrder && (
@@ -213,4 +159,3 @@ export const Cart = () => {
         </Container>
     );
 };
-
