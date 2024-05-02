@@ -1,4 +1,4 @@
-# Nombre del Proyecto:Entrga final del Ecommerce-curso de React en Coder House
+# Nombre del Proyecto:Entrega final del Ecommerce-curso de React en Coder House
 
 Este proyecto es una tienda en línea desarrollada con React.js y Firebase, que permite a los usuarios explorar una variedad de productos, agregarlos al carrito de compras y realizar pedidos.
 
